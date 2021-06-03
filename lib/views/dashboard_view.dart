@@ -1,15 +1,12 @@
-import 'package:eve_mobile/providers/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:eve_mobile/views/home_view.dart';
 import 'package:eve_mobile/views/settings_view.dart';
-import 'package:provider/provider.dart';
 
-class Dashboard extends StatefulWidget {
-  @override
-  _DashboardState createState() => _DashboardState();
-}
+class Dashboard extends StatelessWidget {
+  static const routeName = '/';
 
-class _DashboardState extends State<Dashboard> {
+  const Dashboard({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(

@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:eve_mobile/services/api_service.dart';
+import 'package:eve_mobile/services/api/api_service.dart' show APIServiceResponse;
+import 'package:eve_mobile/services/api/auth_api_service.dart';
 
 class AuthProvider extends ChangeNotifier {
-  FlutterSecureStorage _storage = new FlutterSecureStorage();
-  APIService _apiService = new APIService();
+  FlutterSecureStorage _storage = FlutterSecureStorage();
+  AuthAPIService _authAPIService = AuthAPIService();
 
-  Future<APIServiceResponse> checkExistingToken() async {
-    var token = await _storage.read(key: 'token');
-    var response = await _apiService.ping(token);
+  Future<bool> checkExistingToken() async {
+    // await _storage.deleteAll();
+    var response = await _authAPIService.checkExistingToken();
 
-    return response;
+    return response.success;
   }
 
-  Future<APIServiceResponse> login({String userId, String code}) async {
-    var response = await _apiService.login(userId: userId, code: code);
+  Future<APIServiceResponse> login({required String userId, required String code}) async {
+    var response = await _authAPIService.login(userId: userId, code: code);
 
     if (response.success) {
       await _storage.write(key: 'token', value: response.data['token']);
@@ -24,7 +25,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<APIServiceResponse> requestOtpCode(String userId) async {
-    var response = await _apiService.requestOtpCode(userId);
+    var response = await _authAPIService.requestOtpCode(userId);
 
     return response;
   }

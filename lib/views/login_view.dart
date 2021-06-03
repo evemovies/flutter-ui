@@ -3,6 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
+  static const routeName = '/login';
+
+  const Login({Key? key}) : super(key: key);
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -21,9 +25,9 @@ class _LoginState extends State<Login> {
   }
 
   void _attemptToAutoLogin() async {
-    var result = await Provider.of<AuthProvider>(context, listen: false).checkExistingToken();
+    var isTokenValid = await Provider.of<AuthProvider>(context, listen: false).checkExistingToken();
 
-    if (result.success) {
+    if (isTokenValid) {
       Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
     }
   }
@@ -124,21 +128,6 @@ class _LoginState extends State<Login> {
           child: Center(
               child: Column(
         children: [Spacer(), _renderErrorMessage(), ..._buildLoginForm()],
-        // children: [
-        //   Spacer(),
-        //   Container(
-        //     width: 200,
-        //     child: CupertinoTextField(
-        //       controller: _userIdController,
-        //       placeholder: 'User ID',
-        //     ),
-        //   ),
-        //   SizedBox(height: 30),
-        //   CupertinoButton.filled(
-        //       child: Text(otpCodeRequested ? 'Login' : 'Request code'),
-        //       onPressed: _handleLoginClick),
-        //   Spacer()
-        // ],
       ))),
     );
   }

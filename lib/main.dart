@@ -15,8 +15,11 @@ class EveMobile extends StatelessWidget {
         create: (_) => AuthProvider(),
         child: CupertinoApp(
           title: 'EveMovies',
-          initialRoute: '/login',
-          routes: {'/': (context) => Dashboard(), '/login': (context) => Login()},
+          initialRoute: Login.routeName,
+          routes: {
+            Dashboard.routeName: (context) => Dashboard(),
+            Login.routeName: (context) => Login()
+          },
         ));
   }
 }
