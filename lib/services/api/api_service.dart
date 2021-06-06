@@ -1,20 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as fss;
 import 'package:dio/dio.dart';
+import 'package:eve_mobile/models/api_response_model.dart';
 
 const BASE_URL = 'http://127.0.0.1:3000';
-
-class APIServiceResponse {
-  final bool success;
-  final Map<String, dynamic> data;
-  final String error;
-
-  APIServiceResponse({required this.success, this.data = const {}, this.error = ''});
-
-  APIServiceResponse.fromJson(Map<String, dynamic> json)
-      : success = json['success'],
-        data = json['data'] ?? {},
-        error = json['error'] ?? '';
-}
 
 class APIService {
   late final Dio _httpClient;

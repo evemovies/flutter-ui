@@ -3,7 +3,7 @@ import 'package:eve_mobile/views/home_view.dart';
 import 'package:eve_mobile/views/settings_view.dart';
 
 class Dashboard extends StatelessWidget {
-  static const routeName = '/';
+  static const routeName = '/dashboard';
 
   const Dashboard({Key? key}) : super(key: key);
 

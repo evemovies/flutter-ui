@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'api_service.dart';
+import 'package:eve_mobile/services/api/api_service.dart';
+import 'package:eve_mobile/models/api_response_model.dart';
 
 class AuthAPIService {
   final _apiService = APIService();
@@ -19,7 +20,7 @@ class AuthAPIService {
   }
 
   Future<APIServiceResponse> checkExistingToken() async {
-    var response = await _apiService.get('/api/v1/ping');
+    var response = await _apiService.get('/api/v1/general/ping');
 
     return response;
   }

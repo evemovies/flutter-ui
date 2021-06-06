@@ -1,9 +1,10 @@
-import 'package:eve_mobile/providers/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:eve_mobile/providers/auth_provider.dart';
+import 'package:eve_mobile/views/dashboard_view.dart';
 
 class Login extends StatefulWidget {
-  static const routeName = '/login';
+  static const routeName = '/';
 
   const Login({Key? key}) : super(key: key);
 
@@ -28,7 +29,7 @@ class _LoginState extends State<Login> {
     var isTokenValid = await Provider.of<AuthProvider>(context, listen: false).checkExistingToken();
 
     if (isTokenValid) {
-      Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
+      Navigator.pushNamedAndRemoveUntil(context, Dashboard.routeName, (r) => false);
     }
   }
 
@@ -58,7 +59,7 @@ class _LoginState extends State<Login> {
         await Provider.of<AuthProvider>(context, listen: false).login(userId: userId, code: code);
 
     if (result.success) {
-      Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
+      Navigator.pushNamedAndRemoveUntil(context, Dashboard.routeName, (r) => false);
     } else {
       setState(() {
         _errorMessage = result.error;
