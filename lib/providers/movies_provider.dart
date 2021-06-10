@@ -14,4 +14,11 @@ class MoviesProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  // TODO store movies as a map to find movie by id faster
+  Movie getMovieById(String id) {
+    var movie = movies.where((m) => m.id == id).first;
+
+    return movie;
+  }
 }

@@ -3,16 +3,16 @@ import 'package:provider/provider.dart';
 import 'package:eve_mobile/providers/auth_provider.dart';
 import 'package:eve_mobile/views/dashboard_view.dart';
 
-class Login extends StatefulWidget {
+class LoginView extends StatefulWidget {
   static const routeName = '/';
 
-  const Login({Key? key}) : super(key: key);
+  const LoginView({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _LoginViewState createState() => _LoginViewState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginViewState extends State<LoginView> {
   bool _otpCodeRequested = false;
   String _errorMessage = '';
   TextEditingController _userIdController = TextEditingController(text: '');
@@ -29,7 +29,7 @@ class _LoginState extends State<Login> {
     var isTokenValid = await Provider.of<AuthProvider>(context, listen: false).checkExistingToken();
 
     if (isTokenValid) {
-      Navigator.pushNamedAndRemoveUntil(context, Dashboard.routeName, (r) => false);
+      Navigator.pushNamedAndRemoveUntil(context, DashboardView.routeName, (r) => false);
     }
   }
 
@@ -59,7 +59,7 @@ class _LoginState extends State<Login> {
         await Provider.of<AuthProvider>(context, listen: false).login(userId: userId, code: code);
 
     if (result.success) {
-      Navigator.pushNamedAndRemoveUntil(context, Dashboard.routeName, (r) => false);
+      Navigator.pushNamedAndRemoveUntil(context, DashboardView.routeName, (r) => false);
     } else {
       setState(() {
         _errorMessage = result.error;

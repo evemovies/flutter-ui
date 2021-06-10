@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eve_mobile/providers/movies_provider.dart';
-import 'package:eve_mobile/widgets/home/movies_list.dart';
+import 'package:eve_mobile/widgets/dashboard/home/movies_list.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+class HomeTab extends StatefulWidget {
+  const HomeTab({Key? key}) : super(key: key);
 
   @override
-  _HomeViewState createState() => _HomeViewState();
+  _HomeTabState createState() => _HomeTabState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeTabState extends State<HomeTab> {
   Future? _getMoviesFuture;
 
   @override

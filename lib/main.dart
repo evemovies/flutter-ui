@@ -4,6 +4,7 @@ import 'package:eve_mobile/providers/auth_provider.dart';
 import 'package:eve_mobile/providers/movies_provider.dart';
 import 'package:eve_mobile/views/dashboard_view.dart';
 import 'package:eve_mobile/views/login_view.dart';
+import 'package:eve_mobile/views/movie_view.dart';
 
 void main() {
   runApp(EveMobile());
@@ -19,10 +20,11 @@ class EveMobile extends StatelessWidget {
         ],
         child: CupertinoApp(
           title: 'EveMovies',
-          initialRoute: Login.routeName,
+          initialRoute: LoginView.routeName,
           routes: {
-            Dashboard.routeName: (context) => Dashboard(),
-            Login.routeName: (context) => Login()
+            DashboardView.routeName: (context) => DashboardView(),
+            LoginView.routeName: (context) => LoginView(),
+            MovieView.routeName: (context) => MovieView(),
           },
         ));
   }

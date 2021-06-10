@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:eve_mobile/views/home_view.dart';
-import 'package:eve_mobile/views/settings_view.dart';
+import 'package:eve_mobile/widgets/dashboard/home_tab.dart';
+import 'package:eve_mobile/widgets/dashboard/settings_tab.dart';
 
-class Dashboard extends StatelessWidget {
+class DashboardView extends StatelessWidget {
   static const routeName = '/dashboard';
 
-  const Dashboard({Key? key}) : super(key: key);
+  const DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,11 @@ class Dashboard extends StatelessWidget {
           tabBuilder: (context, index) {
             switch (index) {
               case 0:
-                return HomeView();
+                return HomeTab();
               case 1:
-                return SettingsView();
+                return SettingsTab();
               default:
-                return HomeView();
+                return HomeTab();
             }
           },
         ),
