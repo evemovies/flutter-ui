@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:eve_mobile/providers/movies_provider.dart';
+import 'package:eve_mobile/providers/user_provider.dart';
 import 'package:eve_mobile/widgets/dashboard/home/movies_list.dart';
 
 class HomeTab extends StatefulWidget {
@@ -12,25 +12,25 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  Future? _getMoviesFuture;
+  Future? _getUserFuture;
 
   @override
   void initState() {
     super.initState();
 
     Future.delayed(Duration.zero, () {
-      _getMoviesFuture = Provider.of<MoviesProvider>(context, listen: false).getMovies();
+      _getUserFuture = Provider.of<UserProvider>(context, listen: false).getUser();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _getMoviesFuture,
+        future: _getUserFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return Consumer<MoviesProvider>(builder: (context, moviesProvider, child) {
-              return MoviesList(moviesList: moviesProvider.movies);
+            return Consumer<UserProvider>(builder: (context, userProvider, child) {
+              return MoviesList(moviesList: userProvider.user.observableMovies);
             });
           } else {
             return Center(

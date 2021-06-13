@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:eve_mobile/providers/movies_provider.dart';
+import 'package:eve_mobile/providers/user_provider.dart';
 import 'package:eve_mobile/widgets/movie/single_movie.dart';
 
 class MovieViewRouteArgs {
@@ -18,7 +18,7 @@ class MovieView extends StatelessWidget {
   Widget build(BuildContext context) {
     var routeArgs = ModalRoute.of(context)!.settings.arguments as MovieViewRouteArgs;
     var movieId = routeArgs.movieId;
-    var movie = Provider.of<MoviesProvider>(context).getMovieById(movieId);
+    var movie = Provider.of<UserProvider>(context).getUserMovie(movieId);
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
