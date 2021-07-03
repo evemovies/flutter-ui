@@ -8,8 +8,7 @@ class MovieItem extends StatelessWidget {
   const MovieItem({Key? key, required this.movie}) : super(key: key);
 
   void _handleMovieTap(BuildContext context) {
-    Navigator.pushNamed(context, MovieView.routeName,
-        arguments: MovieViewRouteArgs(movieId: movie.id));
+    Navigator.pushNamed(context, MovieView.routeName, arguments: MovieViewRouteArgs(movieId: movie.id));
   }
 
   @override
@@ -20,9 +19,9 @@ class MovieItem extends StatelessWidget {
         child: Column(children: [
           Image.network(
             movie.posterUrl,
-            scale: 0.5,
+            height: 350,
           ),
-          Text(movie.title)
+          Text(movie.title, overflow: TextOverflow.ellipsis)
         ]),
       ),
     );

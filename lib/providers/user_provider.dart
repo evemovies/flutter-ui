@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:eve_mobile/models/movie_model.dart';
 import 'package:eve_mobile/models/user_model.dart';
 import 'package:eve_mobile/services/api/user_api_service.dart';
 
@@ -23,12 +22,5 @@ class UserProvider extends ChangeNotifier {
     _user = await _userAPIService.getUser();
 
     notifyListeners();
-  }
-
-  // TODO store movies as a map to find movie by id faster
-  Movie getUserMovie(String id) {
-    var movie = _user.observableMovies.where((m) => m.id == id).first;
-
-    return movie;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:eve_mobile/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:eve_mobile/providers/auth_provider.dart';
@@ -29,6 +30,8 @@ class _LoginViewState extends State<LoginView> {
     var isTokenValid = await Provider.of<AuthProvider>(context, listen: false).checkExistingToken();
 
     if (isTokenValid) {
+      await Provider.of<UserProvider>(context, listen: false).getUser();
+
       Navigator.pushNamedAndRemoveUntil(context, DashboardView.routeName, (r) => false);
     }
   }
@@ -55,8 +58,7 @@ class _LoginViewState extends State<LoginView> {
     var userId = _userIdController.text;
     var code = _otpCodeController.text;
 
-    var result =
-        await Provider.of<AuthProvider>(context, listen: false).login(userId: userId, code: code);
+    var result = await Provider.of<AuthProvider>(context, listen: false).login(userId: userId, code: code);
 
     if (result.success) {
       Navigator.pushNamedAndRemoveUntil(context, DashboardView.routeName, (r) => false);

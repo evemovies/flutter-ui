@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:eve_mobile/models/movie_model.dart';
-import 'package:eve_mobile/widgets/dashboard/home/movie_item.dart';
+import 'package:eve_mobile/widgets/movie/movie_item.dart';
 
 class MoviesList extends StatelessWidget {
   final List<Movie> moviesList;
