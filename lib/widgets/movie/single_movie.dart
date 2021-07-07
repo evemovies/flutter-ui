@@ -24,8 +24,7 @@ class SingleMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(
+    return Column(
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
@@ -36,14 +35,10 @@ class SingleMovie extends StatelessWidget {
         ),
         SizedBox(height: 25),
         Text('${movie.title} (${movie.year})'),
-        SizedBox(height: 25),
-        Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: Text('Here should be some description, but we do not collect it just yet')),
-        SizedBox(height: 25),
+        Spacer(),
         _renderActionButton(),
         SizedBox(height: 25),
       ],
-    ));
+    );
   }
 }

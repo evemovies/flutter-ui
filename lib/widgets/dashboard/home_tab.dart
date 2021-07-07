@@ -5,10 +5,7 @@ import 'package:eve_mobile/providers/user_provider.dart';
 import 'package:eve_mobile/widgets/movie/movies_list.dart';
 
 class HomeTab extends StatefulWidget {
-  static const tabIndex = 0;
-  final bool isActive;
-
-  const HomeTab({Key? key, required this.isActive}) : super(key: key);
+  const HomeTab({Key? key}) : super(key: key);
 
   @override
   _HomeTabState createState() => _HomeTabState();
@@ -37,7 +34,7 @@ class _HomeTabState extends State<HomeTab> {
             });
           } else {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CupertinoActivityIndicator(),
             );
           }
         });

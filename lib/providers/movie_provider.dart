@@ -14,7 +14,7 @@ class MovieProvider extends ChangeNotifier {
 
   List<Movie> get foundMovies => UnmodifiableListView(_foundMovies);
   List<Movie> get userMovies => UnmodifiableListView(_userMovies);
-  List<Movie> get allMovies => UnmodifiableListView([..._foundMovies, ..._userMovies]);
+  List<Movie> get _allMovies => UnmodifiableListView([..._foundMovies, ..._userMovies]);
 
   Future searchMovies({required String title, int? year}) async {
     _foundMovies = await _movieAPIService.searchMovies(language: _user.language, title: title, year: year);
@@ -30,7 +30,7 @@ class MovieProvider extends ChangeNotifier {
 
   // TODO store movies as a map to find movie by id faster
   Movie getMovie(String id) {
-    var movie = allMovies.firstWhere((m) => m.id == id);
+    var movie = _allMovies.firstWhere((m) => m.id == id);
 
     return movie;
   }

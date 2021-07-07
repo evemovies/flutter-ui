@@ -30,8 +30,6 @@ class _LoginViewState extends State<LoginView> {
     var isTokenValid = await Provider.of<AuthProvider>(context, listen: false).checkExistingToken();
 
     if (isTokenValid) {
-      await Provider.of<UserProvider>(context, listen: false).getUser();
-
       Navigator.pushNamedAndRemoveUntil(context, DashboardView.routeName, (r) => false);
     }
   }

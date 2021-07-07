@@ -28,21 +28,21 @@ class MovieView extends StatelessWidget {
   Widget build(BuildContext context) {
     var routeArgs = ModalRoute.of(context)!.settings.arguments as MovieViewRouteArgs;
     var movieId = routeArgs.movieId;
-    var movie = Provider.of<MovieProvider>(context, listen: false).getMovie(movieId);
-    var user = Provider.of<UserProvider>(context, listen: false).user;
 
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text(movie.title),
-      ),
-      child: SafeArea(
-        child: SingleMovie(
-          movie: movie,
-          user: user,
-          onAddMovie: (movie) => _handleAddMovie(context, movie),
-          onRemoveMovie: (movie) => _handleRemoveMovie(context, movie),
-        ),
-      ),
-    );
+    return Consumer2<UserProvider, MovieProvider>(builder: (context, userProvider, movieProvider, child) {
+      var movie = movieProvider.getMovie(movieId);
+
+      return CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+            middle: Text(movie.title),
+          ),
+          child: SafeArea(
+              child: SingleMovie(
+            movie: movie,
+            user: userProvider.user,
+            onAddMovie: (movie) => _handleAddMovie(context, movie),
+            onRemoveMovie: (movie) => _handleRemoveMovie(context, movie),
+          )));
+    });
   }
 }
