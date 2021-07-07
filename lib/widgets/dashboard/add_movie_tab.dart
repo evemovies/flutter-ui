@@ -14,34 +14,7 @@ class AddMovieTab extends StatefulWidget {
 }
 
 class _AddMovieTabState extends State<AddMovieTab> {
-  bool _shouldResetMovies = false;
   TextEditingController _movieTitle = TextEditingController(text: '');
-
-  @override
-  void initState() {
-    super.initState();
-
-    // A hack because didUpdateWidget is not called on the first render
-    Future.delayed(Duration.zero, () {
-      Provider.of<MovieProvider>(context, listen: false).setActiveMoviesList(movies: []);
-    });
-  }
-
-  @override
-  void didUpdateWidget(covariant AddMovieTab oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (widget.isActive && _shouldResetMovies) {
-      Future.delayed(Duration.zero, () {
-        Provider.of<MovieProvider>(context, listen: false).setActiveMoviesList(movies: []);
-
-        _shouldResetMovies = false;
-      });
-    } else if (!widget.isActive) {
-      // Switched to another tab, should reset movies again when navigating here next time
-      _shouldResetMovies = true;
-    }
-  }
 
   void _searchMovies() async {
     await Provider.of<MovieProvider>(context, listen: false).searchMovies(title: _movieTitle.text);
@@ -62,7 +35,7 @@ class _AddMovieTabState extends State<AddMovieTab> {
           ],
         ),
         Consumer<MovieProvider>(builder: (context, movieProvider, child) {
-          return Flexible(child: MoviesList(moviesList: movieProvider.movies));
+          return Flexible(child: MoviesList(moviesList: movieProvider.foundMovies));
         })
       ],
     );

@@ -28,6 +28,5 @@ class User {
         lastActivity = json['lastActivity'],
         totalMovies = json['totalMovies'],
         language = json['language'],
-        observableMovies =
-            (json['observableMovies'] as List).map((movie) => Movie.fromJson(movie)).toList();
+        observableMovies = (json['observableMovies'] as List).map((movie) => Movie.fromJson(movie)).toList();
 }

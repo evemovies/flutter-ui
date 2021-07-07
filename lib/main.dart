@@ -21,7 +21,7 @@ class EveMobile extends StatelessWidget {
           ChangeNotifierProxyProvider<UserProvider, MovieProvider>(
               create: (BuildContext context) => MovieProvider(Provider.of<UserProvider>(context, listen: false).user),
               update: (context, userProvider, movieProvider) =>
-                  movieProvider!..setActiveMoviesList(movies: userProvider.user.observableMovies))
+                  movieProvider!..setUserMoviesList(movies: userProvider.user.observableMovies))
         ],
         child: CupertinoApp(
           title: 'EveMovies',

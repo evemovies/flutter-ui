@@ -1,4 +1,3 @@
-import 'package:eve_mobile/providers/movie_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,6 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  bool _shouldResetMovies = true;
   Future? _getUserFuture;
 
   @override
@@ -26,24 +24,6 @@ class _HomeTabState extends State<HomeTab> {
     Future.delayed(Duration.zero, () {
       _getUserFuture = Provider.of<UserProvider>(context, listen: false).getUser();
     });
-  }
-
-  @override
-  void didUpdateWidget(covariant HomeTab oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (widget.isActive && _shouldResetMovies) {
-      Future.delayed(Duration.zero, () {
-        // Active movies are the ones that user has in the library
-        var user = Provider.of<UserProvider>(context, listen: false).user;
-
-        Provider.of<MovieProvider>(context, listen: false).setActiveMoviesList(movies: user.observableMovies);
-
-        _shouldResetMovies = false;
-      });
-    } else if (!widget.isActive) {
-      _shouldResetMovies = true;
-    }
   }
 
   @override

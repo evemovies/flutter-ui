@@ -30,4 +30,7 @@ class Movie {
         released = json['released'],
         title = json['title'],
         year = json['year'];
+
+  Map<String, dynamic> toJson() =>
+      {'id': id, 'language': language, 'posterUrl': posterUrl, 'released': released, 'title': title, 'year': year};
 }

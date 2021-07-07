@@ -48,4 +48,11 @@ class APIService {
 
     return responseBody;
   }
+
+  Future<APIServiceResponse> put(String url, {dynamic data}) async {
+    var response = await _httpClient.put(url, data: data);
+    var responseBody = APIServiceResponse.fromJson(response.data);
+
+    return responseBody;
+  }
 }
