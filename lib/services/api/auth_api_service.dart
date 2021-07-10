@@ -19,6 +19,10 @@ class AuthAPIService {
     return response;
   }
 
+  Future logout() async {
+    await _apiService.post('/api/v1/logout', data: {});
+  }
+
   Future<APIServiceResponse> checkExistingToken() async {
     var response = await _apiService.get('/api/v1/general/ping');
 

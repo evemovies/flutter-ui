@@ -1,4 +1,3 @@
-import 'package:eve_mobile/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:eve_mobile/providers/auth_provider.dart';

@@ -31,10 +31,6 @@ class APIService {
     }));
   }
 
-  void logout() {
-    print('Sending logout HTTP request');
-  }
-
   Future<APIServiceResponse> get(String url) async {
     var response = await _httpClient.get(url);
     var responseBody = APIServiceResponse.fromJson(response.data);

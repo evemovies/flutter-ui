@@ -8,7 +8,6 @@ class AuthProvider extends ChangeNotifier {
   AuthAPIService _authAPIService = AuthAPIService();
 
   Future<bool> checkExistingToken() async {
-    // await _storage.deleteAll();
     var response = await _authAPIService.checkExistingToken();
 
     return response.success;
@@ -30,7 +29,9 @@ class AuthProvider extends ChangeNotifier {
     return response;
   }
 
-  void logout() {
-    print('Attempt to logout');
+  Future logout() async {
+    await _authAPIService.logout();
+
+    await _storage.deleteAll();
   }
 }
