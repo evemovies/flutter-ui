@@ -14,6 +14,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   bool _otpCodeRequested = false;
+  bool _autoLoginInProgress = true;
   String _errorMessage = '';
   TextEditingController _userIdController = TextEditingController(text: '');
   TextEditingController _otpCodeController = TextEditingController(text: '');
@@ -30,6 +31,10 @@ class _LoginViewState extends State<LoginView> {
 
     if (isTokenValid) {
       Navigator.pushNamedAndRemoveUntil(context, DashboardView.routeName, (r) => false);
+    } else {
+      setState(() {
+        _autoLoginInProgress = false;
+      });
     }
   }
 
@@ -119,6 +124,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    if (this._autoLoginInProgress) return CupertinoPageScaffold(child: Center(child: CupertinoActivityIndicator()));
+
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text('Login'),
