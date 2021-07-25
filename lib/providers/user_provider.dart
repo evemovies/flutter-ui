@@ -20,11 +20,15 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future addMovieToCollection(Movie movie) async {
-    var updatedUser = await _userAPIService.addMovie(movie);
+    var responseResult = await _userAPIService.addMovie(movie);
 
-    _user = updatedUser;
+    if (responseResult is User) {
+      _user = responseResult;
 
-    notifyListeners();
+      notifyListeners();
+    } else {
+      return responseResult;
+    }
   }
 
   Future removeMovieFromCollection(String movieId) async {

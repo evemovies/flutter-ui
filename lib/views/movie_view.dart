@@ -11,13 +11,30 @@ class MovieViewRouteArgs {
   MovieViewRouteArgs({required this.movieId});
 }
 
-class MovieView extends StatelessWidget {
+class MovieView extends StatefulWidget {
   static const routeName = '/movie';
 
   const MovieView({Key? key}) : super(key: key);
 
-  void _handleAddMovie(BuildContext context, Movie movie) {
-    Provider.of<UserProvider>(context, listen: false).addMovieToCollection(movie);
+  @override
+  _MovieViewState createState() => _MovieViewState();
+}
+
+class _MovieViewState extends State<MovieView> {
+  String _errorMessage = '';
+
+  void _handleAddMovie(BuildContext context, Movie movie) async {
+    var error = await Provider.of<UserProvider>(context, listen: false).addMovieToCollection(movie);
+
+    if (error != null) {
+      setState(() {
+        _errorMessage = error;
+      });
+    } else {
+      setState(() {
+        _errorMessage = '';
+      });
+    }
   }
 
   void _handleRemoveMovie(BuildContext context, Movie movie) {
@@ -40,6 +57,7 @@ class MovieView extends StatelessWidget {
               child: SingleMovie(
             movie: movie,
             user: userProvider.user,
+            errorMessage: _errorMessage,
             onAddMovie: (movie) => _handleAddMovie(context, movie),
             onRemoveMovie: (movie) => _handleRemoveMovie(context, movie),
           )));

@@ -11,10 +11,14 @@ class UserAPIService {
     return User.fromJson(response.data);
   }
 
-  Future<User> addMovie(Movie movie) async {
+  Future addMovie(Movie movie) async {
     var response = await _apiService.put('/api/v1/user/add-movie', data: movie.toJson());
 
-    return User.fromJson(response.data);
+    if (response.success == true) {
+      return User.fromJson(response.data);
+    } else {
+      return response.error;
+    }
   }
 
   Future<User> removeMovie(String movieId) async {
