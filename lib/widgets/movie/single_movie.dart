@@ -23,9 +23,19 @@ class SingleMovie extends StatelessWidget {
     var movieInUserCollection = user.observableMovies.firstWhereOrNull((m) => m.id == movie.id);
 
     if (movieInUserCollection == null)
-      return CupertinoButton.filled(child: Text('Add to collection'), onPressed: () => onAddMovie(movie));
+      return CupertinoButton.filled(
+          child: Text(
+            'Add to collection',
+            style: TextStyle(color: CupertinoColors.white),
+          ),
+          onPressed: () => onAddMovie(movie));
 
-    return CupertinoButton.filled(child: Text('Remove from collection'), onPressed: () => onRemoveMovie(movie));
+    return CupertinoButton.filled(
+        child: Text(
+          'Remove from collection',
+          style: TextStyle(color: CupertinoColors.white),
+        ),
+        onPressed: () => onRemoveMovie(movie));
   }
 
   Widget _renderErrorMessage() {
@@ -62,7 +72,7 @@ class SingleMovie extends StatelessWidget {
         Spacer(),
         _renderErrorMessage(),
         _renderActionButton(),
-        SizedBox(height: 25),
+        // SizedBox(height: 15),
       ],
     );
   }

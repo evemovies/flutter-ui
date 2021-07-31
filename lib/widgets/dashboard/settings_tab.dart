@@ -71,7 +71,10 @@ class SettingsTab extends StatelessWidget {
                                 width: MediaQuery.of(context).size.width / 1.5,
                                 child: CupertinoButton(
                                     color: CupertinoColors.systemRed,
-                                    child: Text('Logout'),
+                                    child: Text(
+                                      'Logout',
+                                      style: TextStyle(color: CupertinoColors.white),
+                                    ),
                                     onPressed: () => _handleLogout(context)))),
                       ],
                     ))));

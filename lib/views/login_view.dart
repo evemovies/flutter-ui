@@ -79,7 +79,13 @@ class _LoginViewState extends State<LoginView> {
         width: 200,
         child: CupertinoTextField(
           controller: _userIdController,
+          decoration: BoxDecoration(
+              color: CupertinoColors.white,
+              border: Border.all(color: CupertinoColors.lightBackgroundGray),
+              borderRadius: BorderRadius.all(Radius.circular(6))),
           placeholder: 'User ID',
+          style: TextStyle(color: CupertinoColors.black),
+          placeholderStyle: TextStyle(color: CupertinoColors.lightBackgroundGray),
         ),
       ),
     ];
@@ -92,7 +98,13 @@ class _LoginViewState extends State<LoginView> {
           width: 200,
           child: CupertinoTextField(
             controller: _otpCodeController,
+            decoration: BoxDecoration(
+                color: CupertinoColors.white,
+                border: Border.all(color: CupertinoColors.lightBackgroundGray),
+                borderRadius: BorderRadius.all(Radius.circular(6))),
             placeholder: 'Code',
+            style: TextStyle(color: CupertinoColors.black),
+            placeholderStyle: TextStyle(color: CupertinoColors.lightBackgroundGray),
           ),
         )
       ]);
@@ -103,9 +115,19 @@ class _LoginViewState extends State<LoginView> {
     ));
 
     if (_otpCodeRequested) {
-      children.add(CupertinoButton.filled(child: Text('Login'), onPressed: _login));
+      children.add(CupertinoButton.filled(
+          child: Text(
+            'Login',
+            style: TextStyle(color: CupertinoColors.white),
+          ),
+          onPressed: _login));
     } else {
-      children.add(CupertinoButton.filled(child: Text('Request code'), onPressed: _requestOtpCode));
+      children.add(CupertinoButton.filled(
+          child: Text(
+            'Request code',
+            style: TextStyle(color: CupertinoColors.white),
+          ),
+          onPressed: _requestOtpCode));
     }
 
     children.add(Spacer());
@@ -127,8 +149,13 @@ class _LoginViewState extends State<LoginView> {
     if (this._autoLoginInProgress) return CupertinoPageScaffold(child: Center(child: CupertinoActivityIndicator()));
 
     return CupertinoPageScaffold(
+      backgroundColor: CupertinoColors.white,
       navigationBar: CupertinoNavigationBar(
-        middle: Text('Login'),
+        backgroundColor: CupertinoColors.extraLightBackgroundGray,
+        middle: Text(
+          'Login',
+          style: TextStyle(color: CupertinoColors.black),
+        ),
         leading: new Container(),
       ),
       child: SafeArea(

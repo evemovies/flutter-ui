@@ -11,12 +11,18 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text('Dashboard'),
+        backgroundColor: CupertinoColors.extraLightBackgroundGray,
+        middle: Text(
+          'Dashboard',
+          style: TextStyle(color: CupertinoColors.black),
+        ),
       ),
       child: SafeArea(
         bottom: false,
         child: CupertinoTabScaffold(
+          backgroundColor: CupertinoColors.white,
           tabBar: CupertinoTabBar(
+            backgroundColor: CupertinoColors.extraLightBackgroundGray,
             items: [
               BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), label: 'Movies'),
               BottomNavigationBarItem(icon: Icon(CupertinoIcons.add_circled), label: 'Add'),

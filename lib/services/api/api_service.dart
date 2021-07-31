@@ -1,8 +1,9 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as fss;
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:eve_mobile/models/api_response_model.dart';
 
-const BASE_URL = 'http://127.0.0.1:3000';
+final String BASE_URL = dotenv.env['API_BASE_URL']!;
 
 class APIService {
   late final Dio _httpClient;

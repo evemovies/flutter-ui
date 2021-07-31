@@ -26,7 +26,7 @@ class Movie {
   Movie.fromJson(Map<String, dynamic> json)
       : id = json['_id'] ?? json['id'],
         language = json['language'],
-        posterUrl = _getMoviePoster(json['posterUrl']),
+        posterUrl = _getMoviePoster(json['posterUrl'] ?? ''),
         released = json['released'],
         title = json['title'],
         year = json['year'];

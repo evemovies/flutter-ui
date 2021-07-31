@@ -22,10 +22,10 @@ class User {
 
   User.fromJson(Map<String, dynamic> json)
       : id = json['_id'],
-        created = json['created'],
+        created = json['created'] ?? 0,
         username = json['username'],
         name = json['name'],
-        lastActivity = json['lastActivity'],
+        lastActivity = json['lastActivity'] ?? 0,
         totalMovies = json['totalMovies'],
         language = json['language'],
         observableMovies = (json['observableMovies'] as List).map((movie) => Movie.fromJson(movie)).toList();

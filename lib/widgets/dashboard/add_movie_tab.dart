@@ -31,9 +31,15 @@ class _AddMovieTabState extends State<AddMovieTab> {
                 child: Padding(
                     padding: EdgeInsets.all(8),
                     child: CupertinoTextField(
+                      decoration: BoxDecoration(
+                          color: CupertinoColors.white,
+                          border: Border.all(color: CupertinoColors.lightBackgroundGray),
+                          borderRadius: BorderRadius.all(Radius.circular(6))),
                       controller: _movieTitle,
                       padding: EdgeInsets.all(12),
                       placeholder: 'Movie title',
+                      placeholderStyle: TextStyle(color: CupertinoColors.lightBackgroundGray),
+                      style: TextStyle(color: CupertinoColors.black),
                     ))),
             Padding(
                 padding: EdgeInsets.all(8),
@@ -41,6 +47,7 @@ class _AddMovieTabState extends State<AddMovieTab> {
                     padding: EdgeInsets.all(0),
                     child: Icon(
                       CupertinoIcons.search,
+                      color: CupertinoColors.white,
                       size: 20,
                     ),
                     onPressed: _searchMovies))
