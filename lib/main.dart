@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:eve_mobile/providers/auth_provider.dart';
@@ -28,6 +29,7 @@ class EveMobile extends StatelessWidget {
         ],
         child: CupertinoApp(
           title: 'EveMovies',
+          theme: CupertinoThemeData(brightness: Brightness.light),
           initialRoute: LoginView.routeName,
           routes: {
             DashboardView.routeName: (context) => DashboardView(),

@@ -22,13 +22,14 @@ class SingleMovie extends StatelessWidget {
   Widget _renderActionButton() {
     var movieInUserCollection = user.observableMovies.firstWhereOrNull((m) => m.id == movie.id);
 
-    if (movieInUserCollection == null)
+    if (movieInUserCollection == null) {
       return CupertinoButton.filled(
           child: Text(
             'Add to collection',
             style: TextStyle(color: CupertinoColors.white),
           ),
           onPressed: () => onAddMovie(movie));
+    }
 
     return CupertinoButton.filled(
         child: Text(
@@ -60,19 +61,21 @@ class SingleMovie extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          child: Image.network(
-            movie.posterUrl,
-            fit: BoxFit.fitWidth,
-          ),
-        ),
+        ConstrainedBox(
+            constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width, maxHeight: MediaQuery.of(context).size.height * 0.7),
+            child: Container(
+                width: double.infinity,
+                child: Image.network(
+                  movie.posterUrl,
+                  fit: BoxFit.fitWidth,
+                ))),
         SizedBox(height: 25),
         Text('${movie.title} (${movie.year})'),
         Spacer(),
         _renderErrorMessage(),
         _renderActionButton(),
-        // SizedBox(height: 15),
+        SizedBox(height: 15),
       ],
     );
   }

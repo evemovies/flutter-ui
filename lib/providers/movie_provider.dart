@@ -23,12 +23,14 @@ class MovieProvider extends ChangeNotifier {
   }
 
   void setUserMoviesList({required List<Movie> movies}) {
-    _userMovies = movies;
+    var existingMovieIds = userMovies.map((movie) => movie.id);
+
+    // Keep previous movies as well
+    _userMovies = [...userMovies, ...movies.where((movie) => !existingMovieIds.contains(movie.id)).toList()];
 
     notifyListeners();
   }
 
-  // TODO store movies as a map to find movie by id faster
   Movie getMovie(String id) {
     var movie = _allMovies.firstWhere((m) => m.id == id);
 

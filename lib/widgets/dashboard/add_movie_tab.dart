@@ -15,7 +15,9 @@ class _AddMovieTabState extends State<AddMovieTab> {
   TextEditingController _movieTitle = TextEditingController(text: '');
   Future? _searchMoviesFuture;
 
-  void _searchMovies() async {
+  void _searchMovies(BuildContext context) async {
+    FocusScope.of(context).unfocus();
+
     setState(() {
       _searchMoviesFuture = Provider.of<MovieProvider>(context, listen: false).searchMovies(title: _movieTitle.text);
     });
@@ -50,7 +52,7 @@ class _AddMovieTabState extends State<AddMovieTab> {
                       color: CupertinoColors.white,
                       size: 20,
                     ),
-                    onPressed: _searchMovies))
+                    onPressed: () => _searchMovies(context)))
           ],
         ),
         Expanded(
