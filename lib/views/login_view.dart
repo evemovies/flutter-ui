@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:eve_mobile/providers/auth_provider.dart';
 import 'package:eve_mobile/views/dashboard_view.dart';
+import 'package:eve_mobile/widgets/login/login_form.dart';
 
 class LoginView extends StatefulWidget {
   static const routeName = '/';
@@ -13,11 +14,9 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  bool _otpCodeRequested = false;
+  bool _userIdAccepted = false;
   bool _autoLoginInProgress = true;
   String _errorMessage = '';
-  TextEditingController _userIdController = TextEditingController(text: '');
-  TextEditingController _otpCodeController = TextEditingController(text: '');
 
   @override
   void initState() {
@@ -38,28 +37,23 @@ class _LoginViewState extends State<LoginView> {
     }
   }
 
-  void _requestOtpCode() async {
-    var userId = _userIdController.text;
+  void _requestOtpCode(String userId) async {
     var result = await Provider.of<AuthProvider>(context, listen: false).requestOtpCode(userId);
 
     if (result.success) {
       setState(() {
         _errorMessage = '';
-        _otpCodeRequested = true;
+        _userIdAccepted = true;
       });
     } else {
       setState(() {
         _errorMessage = result.error;
-        _otpCodeRequested = false;
-        _userIdController.text = '';
+        _userIdAccepted = false;
       });
     }
   }
 
-  void _login() async {
-    var userId = _userIdController.text;
-    var code = _otpCodeController.text;
-
+  void _login(String userId, String code) async {
     var result = await Provider.of<AuthProvider>(context, listen: false).login(userId: userId, code: code);
 
     if (result.success) {
@@ -67,81 +61,8 @@ class _LoginViewState extends State<LoginView> {
     } else {
       setState(() {
         _errorMessage = result.error;
-        _otpCodeRequested = false;
-        _otpCodeController.text = '';
       });
     }
-  }
-
-  List<Widget> _buildLoginForm() {
-    List<Widget> children = [
-      Container(
-        width: 200,
-        child: CupertinoTextField(
-          controller: _userIdController,
-          decoration: BoxDecoration(
-              color: CupertinoColors.white,
-              border: Border.all(color: CupertinoColors.lightBackgroundGray),
-              borderRadius: BorderRadius.all(Radius.circular(6))),
-          placeholder: 'User ID',
-          style: TextStyle(color: CupertinoColors.black),
-          placeholderStyle: TextStyle(color: CupertinoColors.lightBackgroundGray),
-        ),
-      ),
-    ];
-
-    if (_otpCodeRequested) {
-      // Render OTP code input
-      children.addAll([
-        SizedBox(height: 10),
-        Container(
-          width: 200,
-          child: CupertinoTextField(
-            controller: _otpCodeController,
-            decoration: BoxDecoration(
-                color: CupertinoColors.white,
-                border: Border.all(color: CupertinoColors.lightBackgroundGray),
-                borderRadius: BorderRadius.all(Radius.circular(6))),
-            placeholder: 'Code',
-            style: TextStyle(color: CupertinoColors.black),
-            placeholderStyle: TextStyle(color: CupertinoColors.lightBackgroundGray),
-          ),
-        )
-      ]);
-    }
-
-    children.add(SizedBox(
-      height: 30,
-    ));
-
-    if (_otpCodeRequested) {
-      children.add(CupertinoButton.filled(
-          child: Text(
-            'Login',
-            style: TextStyle(color: CupertinoColors.white),
-          ),
-          onPressed: _login));
-    } else {
-      children.add(CupertinoButton.filled(
-          child: Text(
-            'Request code',
-            style: TextStyle(color: CupertinoColors.white),
-          ),
-          onPressed: _requestOtpCode));
-    }
-
-    children.add(Spacer());
-
-    return children;
-  }
-
-  Widget _renderErrorMessage() {
-    if (_errorMessage.length == 0) return Container();
-
-    return Text(
-      'An error has occurred: $_errorMessage',
-      style: TextStyle(color: CupertinoColors.systemRed),
-    );
   }
 
   @override
@@ -158,11 +79,14 @@ class _LoginViewState extends State<LoginView> {
         ),
         leading: new Container(),
       ),
-      child: SafeArea(
-          child: Center(
-              child: Column(
-        children: [Spacer(), _renderErrorMessage(), ..._buildLoginForm()],
-      ))),
+      child: (SafeArea(
+        child: LoginForm(
+          userIdAccepted: _userIdAccepted,
+          errorMessage: _errorMessage,
+          onOtpCodeRequested: _requestOtpCode,
+          onLoginAttempt: _login,
+        ),
+      )),
     );
   }
 }

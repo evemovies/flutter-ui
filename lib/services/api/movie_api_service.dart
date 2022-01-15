@@ -5,7 +5,7 @@ class MovieAPIService {
   final _apiService = APIService();
 
   Future<List<Movie>> searchMovies({required String title, required String language, int? year}) async {
-    var url = '/api/v1/movies/search?lang=$language&title=$title';
+    var url = '/api/v1/movies/search-movie?language=$language&title=$title';
     if (year != null) url += '&year=$year';
 
     var response = await _apiService.get(url);

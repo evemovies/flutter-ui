@@ -17,7 +17,8 @@ class AuthProvider extends ChangeNotifier {
     var response = await _authAPIService.login(userId: userId, code: code);
 
     if (response.success) {
-      await _storage.write(key: 'token', value: response.data['token']);
+      await _storage.write(key: 'token', value: response.data['access_token']);
+      await _storage.write(key: 'user_id', value: response.data['user_id']);
     }
 
     return response;

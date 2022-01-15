@@ -5,8 +5,7 @@ class APIServiceResponse {
 
   APIServiceResponse({required this.success, this.data = const {}, this.error = ''});
 
-  APIServiceResponse.fromJson(Map<String, dynamic> json)
-      : success = json['success'],
-        data = json['data'] ?? {},
-        error = json['error'] ?? '';
+  factory APIServiceResponse.fromJson(Map<String, dynamic> json) {
+    return APIServiceResponse(success: json['success'] ?? false, data: json['data'] ?? {}, error: json['error'] ?? '');
+  }
 }

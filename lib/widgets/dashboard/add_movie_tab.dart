@@ -1,6 +1,5 @@
 import 'package:eve_mobile/widgets/movie/movies_list.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:eve_mobile/providers/movie_provider.dart';
 

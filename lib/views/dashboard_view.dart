@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:eve_mobile/widgets/dashboard/home_tab.dart';
 import 'package:eve_mobile/widgets/dashboard/settings_tab.dart';
 import 'package:eve_mobile/widgets/dashboard/add_movie_tab.dart';
-import 'package:flutter/material.dart';
 
 class DashboardView extends StatelessWidget {
   static const routeName = '/dashboard';
