@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:eve_mobile/models/api_response_model.dart';
 
-final String BASE_URL = dotenv.env['API_BASE_URL']!;
+final String baseUrl = dotenv.env['API_BASE_URL']!;
 
 class APIService {
   late final Dio _httpClient;
@@ -15,7 +15,7 @@ class APIService {
 
   _setupHttpClient() {
     _httpClient = Dio(BaseOptions(
-        baseUrl: BASE_URL,
+        baseUrl: baseUrl,
         contentType: Headers.jsonContentType,
         validateStatus: (status) {
           return status != null && status < 500;
