@@ -19,11 +19,12 @@ class UserProvider extends ChangeNotifier {
     var userId = await _storage.read(key: 'user_id');
 
     if (userId != null) {
-      _user = await _userAPIService.getUser(userId);
+      var receivedUser = await _userAPIService.getUser(userId);
 
-      notifyListeners();
-    } else {
-      print("user_id doesn't exist");
+      if (receivedUser != null) {
+        _user = receivedUser;
+        notifyListeners();
+      }
     }
   }
 
@@ -42,9 +43,11 @@ class UserProvider extends ChangeNotifier {
   Future removeMovieFromCollection(String movieId) async {
     var updatedUser = await _userAPIService.removeMovie(userId: user.id, movieId: movieId);
 
-    _user = updatedUser;
+    if (updatedUser != null) {
+      _user = updatedUser;
 
-    notifyListeners();
+      notifyListeners();
+    }
   }
 
   Movie? getUserMovie(String id) {

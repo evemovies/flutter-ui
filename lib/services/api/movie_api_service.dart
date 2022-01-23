@@ -9,7 +9,13 @@ class MovieAPIService {
     if (year != null) url += '&year=$year';
 
     var response = await _apiService.get(url);
-    var moviesList = (response.data['foundMovies'] as List).map((movie) => Movie.fromJson(movie)).toList();
+    var moviesList;
+
+    if (response.success) {
+      moviesList = (response.data['foundMovies'] as List).map((movie) => Movie.fromJson(movie)).toList();
+    } else {
+      moviesList = [];
+    }
 
     return moviesList;
   }

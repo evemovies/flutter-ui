@@ -32,11 +32,11 @@ class _AddMovieTabState extends State<AddMovieTab> {
                 child: Padding(
                     padding: EdgeInsets.all(8),
                     child: CupertinoTextField(
+                      controller: _movieTitle,
                       decoration: BoxDecoration(
                           color: CupertinoColors.white,
                           border: Border.all(color: CupertinoColors.lightBackgroundGray),
                           borderRadius: BorderRadius.all(Radius.circular(6))),
-                      controller: _movieTitle,
                       padding: EdgeInsets.all(12),
                       placeholder: 'Movie title',
                       placeholderStyle: TextStyle(color: CupertinoColors.lightBackgroundGray),
@@ -61,7 +61,10 @@ class _AddMovieTabState extends State<AddMovieTab> {
                 if (snapshot.connectionState == ConnectionState.done ||
                     snapshot.connectionState == ConnectionState.none) {
                   return Consumer<MovieProvider>(
-                      builder: (context, movieProvider, child) => MoviesList(moviesList: movieProvider.foundMovies));
+                      builder: (context, movieProvider, child) => MoviesList(
+                            moviesList: movieProvider.foundMovies,
+                            emptyMessage: 'No movies found',
+                          ));
                 } else {
                   return Center(
                     child: CupertinoActivityIndicator(),

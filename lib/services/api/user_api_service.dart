@@ -5,10 +5,14 @@ import 'package:eve_mobile/models/movie_model.dart';
 class UserAPIService {
   final _apiService = APIService();
 
-  Future<User> getUser(String userId) async {
+  Future<User?> getUser(String userId) async {
     var response = await _apiService.get('/api/v1/users/' + userId);
 
-    return User.fromJson(response.data);
+    if (response.success == true) {
+      var user = User.fromJson(response.data);
+
+      return user;
+    }
   }
 
   Future addMovie({required String userId, required Movie movie}) async {
@@ -21,9 +25,11 @@ class UserAPIService {
     }
   }
 
-  Future<User> removeMovie({required String userId, required String movieId}) async {
+  Future<User?> removeMovie({required String userId, required String movieId}) async {
     var response = await _apiService.post('/api/v1/users/$userId/remove-movie', data: {'id': movieId});
 
-    return User.fromJson(response.data);
+    if (response.success == true) {
+      return User.fromJson(response.data);
+    }
   }
 }

@@ -49,6 +49,8 @@ class SettingsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isProduction = bool.fromEnvironment('dart.vm.product');
+
     return SafeArea(
         child: Padding(
             padding: EdgeInsets.all(16),
@@ -63,6 +65,7 @@ class SettingsTab extends StatelessWidget {
                         Text('Username: ${userProvider.user.username}'),
                         Text('ID: ${userProvider.user.id}'),
                         Text('Movies notifications sent: ${userProvider.user.totalMovies}'),
+                        Text('Production: $isProduction'),
                         Spacer(),
                         Center(
                             child: CupertinoButton(child: Text('About'), onPressed: () => _showAboutMessage(context))),

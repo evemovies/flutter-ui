@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:eve_mobile/providers/auth_provider.dart';
+import 'package:eve_mobile/views/login_view.dart';
 import 'package:eve_mobile/providers/user_provider.dart';
 import 'package:eve_mobile/widgets/movie/movies_list.dart';
+import 'package:eve_mobile/models/user_model.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -23,6 +25,21 @@ class _HomeTabState extends State<HomeTab> {
     });
   }
 
+  Widget _renderMoviesListOrRedirect(User user) {
+    if (user.id.isEmpty) {
+      Provider.of<AuthProvider>(context, listen: false).logout().then((value) {
+        Navigator.pushNamedAndRemoveUntil(context, LoginView.routeName, (r) => false);
+      });
+
+      return Container();
+    } else {
+      return MoviesList(
+        moviesList: user.observableMovies,
+        emptyMessage: 'You have no movies in your library',
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -30,7 +47,7 @@ class _HomeTabState extends State<HomeTab> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Consumer<UserProvider>(builder: (context, userProvider, child) {
-              return MoviesList(moviesList: userProvider.user.observableMovies);
+              return _renderMoviesListOrRedirect(userProvider.user);
             });
           } else {
             return Center(

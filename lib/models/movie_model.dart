@@ -2,9 +2,7 @@ String _getMoviePoster(String originalUrl) {
   // Sometimes movies don't have valid posters, then we replace it with a placeholder
   var isUrlValid = Uri.parse(originalUrl).isAbsolute;
 
-  return isUrlValid
-      ? originalUrl
-      : 'https://i1.wp.com/www.countme2020.org/wp-content/uploads/woocommerce-placeholder.jpg?resize=300%2C375&ssl=1';
+  return isUrlValid ? originalUrl : 'https://cringemdb.com/img/movie-poster-placeholder.png';
 }
 
 class Movie {

@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as fss;
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:eve_mobile/models/api_response_model.dart';
 
 final String baseUrl = dotenv.env['API_BASE_URL']!;
@@ -32,24 +33,42 @@ class APIService {
     }));
   }
 
-  Future<APIServiceResponse> get(String url) async {
-    var response = await _httpClient.get(url);
-    var responseBody = APIServiceResponse.fromJson(response.data);
+  APIServiceResponse _handleHttpError(DioError error) {
+    Fluttertoast.showToast(msg: 'Server error, try again later', timeInSecForIosWeb: 5);
 
-    return responseBody;
+    return APIServiceResponse(success: false);
+  }
+
+  Future<APIServiceResponse> get(String url) async {
+    try {
+      var response = await _httpClient.get(url);
+      var responseBody = APIServiceResponse.fromJson(response.data);
+
+      return responseBody;
+    } on DioError catch (e) {
+      return _handleHttpError(e);
+    }
   }
 
   Future<APIServiceResponse> post(String url, {dynamic data}) async {
-    var response = await _httpClient.post(url, data: data);
-    var responseBody = APIServiceResponse.fromJson(response.data);
+    try {
+      var response = await _httpClient.post(url, data: data);
+      var responseBody = APIServiceResponse.fromJson(response.data);
 
-    return responseBody;
+      return responseBody;
+    } on DioError catch (e) {
+      return _handleHttpError(e);
+    }
   }
 
   Future<APIServiceResponse> put(String url, {dynamic data}) async {
-    var response = await _httpClient.put(url, data: data);
-    var responseBody = APIServiceResponse.fromJson(response.data);
+    try {
+      var response = await _httpClient.put(url, data: data);
+      var responseBody = APIServiceResponse.fromJson(response.data);
 
-    return responseBody;
+      return responseBody;
+    } on DioError catch (e) {
+      return _handleHttpError(e);
+    }
   }
 }
