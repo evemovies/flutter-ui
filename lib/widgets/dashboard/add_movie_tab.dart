@@ -63,6 +63,7 @@ class _AddMovieTabState extends State<AddMovieTab> {
                   return Consumer<MovieProvider>(
                       builder: (context, movieProvider, child) => MoviesList(
                             moviesList: movieProvider.foundMovies,
+                            errorMessage: movieProvider.errorMessage,
                             emptyMessage: 'No movies found',
                           ));
                 } else {

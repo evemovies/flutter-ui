@@ -11,13 +11,21 @@ class MovieProvider extends ChangeNotifier {
   List<Movie> _foundMovies = [];
   List<Movie> _userMovies = [];
   MovieAPIService _movieAPIService = MovieAPIService();
+  String _errorMessage = '';
 
   List<Movie> get foundMovies => UnmodifiableListView(_foundMovies);
   List<Movie> get userMovies => UnmodifiableListView(_userMovies);
   List<Movie> get _allMovies => UnmodifiableListView([..._foundMovies, ..._userMovies]);
+  String get errorMessage => _errorMessage;
 
   Future searchMovies({required String title, int? year}) async {
-    _foundMovies = await _movieAPIService.searchMovies(language: _user.language, title: title, year: year);
+    var result = await _movieAPIService.searchMovies(language: _user.language, title: title, year: year);
+
+    if (result is List) {
+      _foundMovies = result as List<Movie>;
+    } else {
+      _errorMessage = result;
+    }
 
     notifyListeners();
   }

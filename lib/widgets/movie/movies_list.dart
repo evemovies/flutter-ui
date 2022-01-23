@@ -5,8 +5,9 @@ import 'package:eve_mobile/widgets/movie/movie_item.dart';
 class MoviesList extends StatelessWidget {
   final List<Movie> moviesList;
   final String? emptyMessage;
+  final String? errorMessage;
 
-  const MoviesList({Key? key, required this.moviesList, this.emptyMessage}) : super(key: key);
+  const MoviesList({Key? key, required this.moviesList, this.emptyMessage, this.errorMessage}) : super(key: key);
 
   List<List<Movie>> _getMoviePairs() {
     List<List<Movie>> result = [];
@@ -20,17 +21,17 @@ class MoviesList extends StatelessWidget {
     return result;
   }
 
-  _showEmptyPlaceHolder() {
-    var defaultEmptyMessage = 'No movies to display';
+  _renderMessage() {
+    var defaultMessage = 'No movies to display';
 
-    return Center(child: Text(emptyMessage ?? defaultEmptyMessage));
+    return Center(child: Text(errorMessage ?? emptyMessage ?? defaultMessage));
   }
 
   @override
   Widget build(BuildContext context) {
     var pairs = _getMoviePairs();
 
-    if (moviesList.length == 0) return _showEmptyPlaceHolder();
+    if (moviesList.length == 0) return _renderMessage();
 
     return ListView.builder(
         itemCount: pairs.length,
