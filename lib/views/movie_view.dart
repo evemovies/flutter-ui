@@ -50,24 +50,20 @@ class _MovieViewState extends State<MovieView> {
       var movie = movieProvider.getMovie(movieId);
 
       return CupertinoPageScaffold(
-          backgroundColor: CupertinoColors.white,
           navigationBar: CupertinoNavigationBar(
-            backgroundColor: CupertinoColors.extraLightBackgroundGray,
             middle: Text(
               movie.title,
-              style: TextStyle(color: CupertinoColors.black),
             ),
           ),
           child: SafeArea(
               child: Container(
-                  color: CupertinoColors.white,
                   child: SingleMovie(
-                    movie: movie,
-                    user: userProvider.user,
-                    errorMessage: _errorMessage,
-                    onAddMovie: (movie) => _handleAddMovie(context, movie),
-                    onRemoveMovie: (movie) => _handleRemoveMovie(context, movie),
-                  ))));
+            movie: movie,
+            user: userProvider.user,
+            errorMessage: _errorMessage,
+            onAddMovie: (movie) => _handleAddMovie(context, movie),
+            onRemoveMovie: (movie) => _handleRemoveMovie(context, movie),
+          ))));
     });
   }
 }

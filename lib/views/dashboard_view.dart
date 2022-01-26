@@ -56,18 +56,15 @@ class _DashboardViewState extends State<DashboardView> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        backgroundColor: CupertinoColors.extraLightBackgroundGray,
         middle: Text(
           'Dashboard',
-          style: TextStyle(color: CupertinoColors.black),
         ),
       ),
       child: SafeArea(
         bottom: false,
         child: CupertinoTabScaffold(
-          backgroundColor: CupertinoColors.white,
+          backgroundColor: CupertinoColors.systemBackground,
           tabBar: CupertinoTabBar(
-            backgroundColor: CupertinoColors.extraLightBackgroundGray,
             onTap: _handleNavigationBarTap,
             items: _getNavigationBarItems(),
           ),

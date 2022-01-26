@@ -70,12 +70,9 @@ class _LoginViewState extends State<LoginView> {
     if (this._autoLoginInProgress) return CupertinoPageScaffold(child: Center(child: CupertinoActivityIndicator()));
 
     return CupertinoPageScaffold(
-      backgroundColor: CupertinoColors.white,
       navigationBar: CupertinoNavigationBar(
-        backgroundColor: CupertinoColors.extraLightBackgroundGray,
         middle: Text(
           'Login',
-          style: TextStyle(color: CupertinoColors.black),
         ),
         leading: new Container(),
       ),

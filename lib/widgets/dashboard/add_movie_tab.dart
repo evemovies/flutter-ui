@@ -38,13 +38,10 @@ class _AddMovieTabState extends State<AddMovieTab> {
                     child: CupertinoTextField(
                       controller: _movieTitle,
                       decoration: BoxDecoration(
-                          color: CupertinoColors.white,
-                          border: Border.all(color: CupertinoColors.lightBackgroundGray),
+                          border: Border.all(color: CupertinoColors.systemGrey3),
                           borderRadius: BorderRadius.all(Radius.circular(6))),
                       padding: EdgeInsets.all(12),
                       placeholder: 'Movie title',
-                      placeholderStyle: TextStyle(color: CupertinoColors.lightBackgroundGray),
-                      style: TextStyle(color: CupertinoColors.black),
                     ))),
             Padding(
                 padding: EdgeInsets.all(8),

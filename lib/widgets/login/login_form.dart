@@ -29,12 +29,9 @@ class _LoginFormState extends State<LoginForm> {
         child: CupertinoTextField(
           controller: _userIdController,
           decoration: BoxDecoration(
-              color: CupertinoColors.white,
-              border: Border.all(color: CupertinoColors.lightBackgroundGray),
+              border: Border.all(color: CupertinoColors.systemGrey3),
               borderRadius: BorderRadius.all(Radius.circular(6))),
           placeholder: 'User ID',
-          style: TextStyle(color: CupertinoColors.black),
-          placeholderStyle: TextStyle(color: CupertinoColors.lightBackgroundGray),
         ),
       )
     ];
@@ -47,11 +44,9 @@ class _LoginFormState extends State<LoginForm> {
           child: CupertinoTextField(
             controller: _otpCodeController,
             decoration: BoxDecoration(
-                color: CupertinoColors.white,
-                border: Border.all(color: CupertinoColors.lightBackgroundGray),
+                border: Border.all(color: CupertinoColors.systemGrey3),
                 borderRadius: BorderRadius.all(Radius.circular(6))),
             placeholder: 'Code',
-            style: TextStyle(color: CupertinoColors.black),
             placeholderStyle: TextStyle(color: CupertinoColors.lightBackgroundGray),
           ),
         )
