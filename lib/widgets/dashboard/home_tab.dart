@@ -25,6 +25,10 @@ class _HomeTabState extends State<HomeTab> {
     });
   }
 
+  Future<void> _refreshMoviesList() async {
+    await Provider.of<UserProvider>(context, listen: false).getUser();
+  }
+
   Widget _renderMoviesListOrRedirect(User user) {
     if (user.id.isEmpty) {
       Provider.of<AuthProvider>(context, listen: false).logout().then((value) {
@@ -34,6 +38,7 @@ class _HomeTabState extends State<HomeTab> {
       return Container();
     } else {
       return MoviesList(
+        onMovieRefresh: _refreshMoviesList,
         moviesList: user.observableMovies,
         emptyMessage: 'You have no movies in your library',
       );

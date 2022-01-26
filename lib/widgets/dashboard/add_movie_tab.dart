@@ -22,6 +22,10 @@ class _AddMovieTabState extends State<AddMovieTab> {
     });
   }
 
+  Future<void> _refreshMoviesList() async {
+    await Provider.of<MovieProvider>(context, listen: false).searchMovies(title: _movieTitle.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,6 +66,7 @@ class _AddMovieTabState extends State<AddMovieTab> {
                     snapshot.connectionState == ConnectionState.none) {
                   return Consumer<MovieProvider>(
                       builder: (context, movieProvider, child) => MoviesList(
+                            onMovieRefresh: _refreshMoviesList,
                             moviesList: movieProvider.foundMovies,
                             errorMessage: movieProvider.errorMessage,
                             emptyMessage: 'No movies found',

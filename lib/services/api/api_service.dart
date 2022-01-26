@@ -4,7 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:eve_mobile/models/api_response_model.dart';
 
-final String baseUrl = dotenv.env['API_BASE_URL']!;
+final String baseUrl = dotenv.env[bool.fromEnvironment('dart.vm.product') ? 'PROD_API_BASE_URL' : 'API_BASE_URL']!;
 
 class APIService {
   late final Dio _httpClient;
