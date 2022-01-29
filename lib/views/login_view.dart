@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:eve_mobile/providers/theme_provider.dart';
 import 'package:eve_mobile/providers/auth_provider.dart';
 import 'package:eve_mobile/views/dashboard_view.dart';
 import 'package:eve_mobile/widgets/login/login_form.dart';
@@ -22,6 +23,7 @@ class _LoginViewState extends State<LoginView> {
   void initState() {
     super.initState();
 
+    Provider.of<ThemeProvider>(context, listen: false).initTheme();
     _attemptToAutoLogin();
   }
 

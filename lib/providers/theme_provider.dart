@@ -9,9 +9,17 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeOption get theme => _theme;
 
+  Future<void> initTheme() async {
+    var savedTheme = await _storage.read(key: 'theme') ?? 'system';
+
+    _theme = ThemeOption.values.byName(savedTheme);
+
+    notifyListeners();
+  }
+
   Future<void> updateTheme(ThemeOption theme) async {
     _theme = theme;
-    await _storage.write(key: 'theme', value: theme.toString());
+    await _storage.write(key: 'theme', value: theme.toString().split('.').last);
 
     notifyListeners();
   }
