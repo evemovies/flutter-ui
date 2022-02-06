@@ -15,7 +15,7 @@ class _AddMovieTabState extends State<AddMovieTab> {
   Future? _searchMoviesFuture;
 
   void _searchMovies(BuildContext context) async {
-    FocusScope.of(context).unfocus();
+    FocusManager.instance.primaryFocus?.unfocus();
 
     setState(() {
       _searchMoviesFuture = Provider.of<MovieProvider>(context, listen: false).searchMovies(title: _movieTitle.text);
@@ -46,13 +46,13 @@ class _AddMovieTabState extends State<AddMovieTab> {
             Padding(
                 padding: EdgeInsets.all(8),
                 child: CupertinoButton.filled(
+                    onPressed: () => _searchMovies(context),
                     padding: EdgeInsets.all(0),
                     child: Icon(
                       CupertinoIcons.search,
                       color: CupertinoColors.white,
                       size: 20,
-                    ),
-                    onPressed: () => _searchMovies(context)))
+                    )))
           ],
         ),
         Expanded(
