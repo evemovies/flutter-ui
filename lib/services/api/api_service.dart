@@ -8,7 +8,7 @@ final String baseUrl = dotenv.env[bool.fromEnvironment('dart.vm.product') ? 'PRO
 
 class APIService {
   late final Dio _httpClient;
-  fss.FlutterSecureStorage _storage = fss.FlutterSecureStorage();
+  final fss.FlutterSecureStorage _storage = fss.FlutterSecureStorage();
 
   APIService() {
     _setupHttpClient();

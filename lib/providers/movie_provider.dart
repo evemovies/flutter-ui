@@ -10,7 +10,7 @@ class MovieProvider extends ChangeNotifier {
   final User _user;
   List<Movie> _foundMovies = [];
   List<Movie> _userMovies = [];
-  MovieAPIService _movieAPIService = MovieAPIService();
+  final MovieAPIService _movieAPIService = MovieAPIService();
   String _errorMessage = '';
 
   List<Movie> get foundMovies => UnmodifiableListView(_foundMovies);

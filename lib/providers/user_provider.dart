@@ -9,8 +9,8 @@ User _emptyUser = User(
     id: '', created: 0, username: '', name: '', lastActivity: 0, totalMovies: 0, language: '', observableMovies: []);
 
 class UserProvider extends ChangeNotifier {
-  FlutterSecureStorage _storage = FlutterSecureStorage();
-  UserAPIService _userAPIService = UserAPIService();
+  final FlutterSecureStorage _storage = FlutterSecureStorage();
+  final UserAPIService _userAPIService = UserAPIService();
   User _user = _emptyUser;
 
   User get user => _user;

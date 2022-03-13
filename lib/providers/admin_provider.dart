@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:eve_mobile/services/api/admin_api_service.dart';
 
 class AdminProvider extends ChangeNotifier {
-  AdminAPIService _adminAPIService = AdminAPIService();
+  final AdminAPIService _adminAPIService = AdminAPIService();
   AdminStats? _stats;
   String _errorMessage = '';
 

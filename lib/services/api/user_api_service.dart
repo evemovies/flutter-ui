@@ -13,6 +13,8 @@ class UserAPIService {
 
       return user;
     }
+
+    return null;
   }
 
   Future addMovie({required String userId, required Movie movie}) async {
@@ -31,5 +33,7 @@ class UserAPIService {
     if (response.success == true) {
       return User.fromJson(response.data);
     }
+
+    return null;
   }
 }

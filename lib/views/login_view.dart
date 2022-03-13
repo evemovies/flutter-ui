@@ -69,14 +69,14 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    if (this._autoLoginInProgress) return CupertinoPageScaffold(child: Center(child: CupertinoActivityIndicator()));
+    if (_autoLoginInProgress) return CupertinoPageScaffold(child: Center(child: CupertinoActivityIndicator()));
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'Login',
         ),
-        leading: new Container(),
+        leading: Container(),
       ),
       child: (SafeArea(
         child: LoginForm(

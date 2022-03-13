@@ -56,14 +56,13 @@ class _MovieViewState extends State<MovieView> {
             ),
           ),
           child: SafeArea(
-              child: Container(
-                  child: SingleMovie(
+              child: SingleMovie(
             movie: movie,
             user: userProvider.user,
             errorMessage: _errorMessage,
             onAddMovie: (movie) => _handleAddMovie(context, movie),
             onRemoveMovie: (movie) => _handleRemoveMovie(context, movie),
-          ))));
+          )));
     });
   }
 }

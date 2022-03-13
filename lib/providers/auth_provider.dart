@@ -4,8 +4,8 @@ import 'package:eve_mobile/services/api/auth_api_service.dart';
 import 'package:eve_mobile/models/api_response_model.dart';
 
 class AuthProvider extends ChangeNotifier {
-  FlutterSecureStorage _storage = FlutterSecureStorage();
-  AuthAPIService _authAPIService = AuthAPIService();
+  final FlutterSecureStorage _storage = FlutterSecureStorage();
+  final AuthAPIService _authAPIService = AuthAPIService();
 
   Future<bool> checkExistingToken() async {
     var response = await _authAPIService.checkExistingToken();
