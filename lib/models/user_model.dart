@@ -21,7 +21,7 @@ class User {
       required this.observableMovies});
 
   User.fromJson(Map<String, dynamic> json)
-      : id = json['_id'],
+      : id = json['id'],
         created = json['created'] ?? 0,
         username = json['username'],
         name = json['name'],
